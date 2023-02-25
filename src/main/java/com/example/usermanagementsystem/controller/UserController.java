@@ -10,17 +10,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(value = "http://localhost:3001")
 @RestController
 @RequestMapping("/api/v1/")
 public class UserController {
-    @Autowired
-    private UserService userService;
-
     @PostMapping("/users")
     public User saveUser(@RequestBody User user) {
         return userService.saveUser(user);
-
     }
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/users")
     public List<User> getAllUsers() {
@@ -44,10 +44,10 @@ public class UserController {
 
 
     }
+
     @PutMapping("/users/{id}")
     public ResponseEntity<User> updateUser(@PathVariable("id") Long id,@RequestBody User user){
         user = userService.updateUser(id,user);
         return ResponseEntity.ok(user);
     }
-
 }
